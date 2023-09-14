@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <h2>Course Details</h2>
+
+      <table border="1" width="100%">
+        <tbody>
+          <tr>
+            <td>Image:</td>
+            <td>
+              <img
+                width="400px"
+                src="https://www.staradvertiser.com/wp-content/uploads/2021/08/web1_Starship-gap2.jpg"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td>CS4550 12631 Web developement</td>
+          </tr>
+          <tr>
+            <td>Course Code</td>
+            <td>CS4550 12631</td>
+          </tr>
+          <tr>
+            <td>Blueprint Course:</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Course Template:</td>
+            <td>
+              <label>
+                <input type="checkbox" name="Text Entry" /> Enable course as a
+                Course Template
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Time Zone:</td>
+            <td>
+              <select id="select-one-genre">
+                <option selected value="edit">
+                  Eastern Time (US & Canada)(-05:00/-04:00)
+                </option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>SIS ID:</td>
+            <td>CS4550.12322.232145</td>
+          </tr>
+          <tr>
+            <td>Subaccount:</td>
+            <td><a href="#">CS Undergrad</a></td>
+          </tr>
+          <tr>
+            <td>Term:</td>
+            <td>102510_1 Fall 2023 Semester Full Term</td>
+          </tr>
+          <tr>
+            <td>Participation:</td>
+            <td>
+              <select id="select-one-genre">
+                <option selected value="edit">
+                  Eastern Time (US & Canada)(-05:00/-04:00)
+                </option>
+              </select>
+              <p>
+                Course Participations is limited to term start and end dates.
+              </p>
+              <h3>Start</h3>
+              <label>
+                <input type="date" name="Start" />
+              </label>
+              <h3>End</h3>
+              <label>
+                <input type="date" name="End" />
+              </label>
+              <div>
+                <label>
+                  <input type="checkbox" name="Text Entry" /> Restrict students
+                  from viewing course before term start date
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input type="checkbox" name="Text Entry" /> Restrict students
+                  from viewing course after term end date
+                </label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Default due time:</td>
+            <td>
+              <select id="select-one-genre">
+                <option selected value="edit">Account default(11:59pm)</option>
+              </select>
+              <p>
+                This influences the user interface for setting due dates. It
+                does not change the time due for any existing assignments.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>Language:</td>
+            <td>
+              <select id="select-one-genre">
+                <option selected value="edit">
+                  Not set (user-configurable, defaults to English)
+                </option>
+              </select>
+              <p>
+                This will override any user/system language preferences. This is
+                only recommended for foreign language courses.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>File Storage:</td>
+            <td>10000 megabytes</td>
+          </tr>
+          <tr>
+            <td>Large Course:</td>
+            <td>
+              <label>
+                <input type="checkbox" name="Text Entry" /> Launch SpeedGrader
+                Filtered by Student Group
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Grading Scheme:</td>
+            <td>
+              <label>
+                <input type="checkbox" name="Text Entry" /> Enable course
+                grading scheme
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>License:</td>
+            <td>
+              <select id="select-one-genre">
+                <option selected value="edit">Private (Copyrighted)</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>File Copyright:</td>
+            <td>
+              <label>
+                <input type="checkbox" name="Text Entry" /> Copyright and
+                license information must be provided for files before they are
+                published.
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Visibility:</td>
+            <td>
+              <p>
+                If you need to make your course public please contact your
+                administrator/support.
+              </p>
+              <select id="select-one-genre">
+                <option selected value="edit">Course</option>
+              </select>
+              <label>
+                <input type="checkbox" name="Text Entry" /> Include this course
+                in the public course index
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Format:</td>
+            <td>
+              <select id="select-one-genre">
+                <option selected value="edit">On-Campus</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Mastery Paths:</td>
+            <td>
+              <label>
+                <input type="checkbox" name="Text Entry" /> Enable individual
+                leanring paths for student based on assessment
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Description:</td>
+            <td>
+              <form id="textarea">
+                <textarea cols="30" rows="10">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea
+                >
+              </form>
+              <a href="#">more options</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button>Update Course Details</button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="tab-container">
+      <button
+        class="tablinks"
+        id="intialTab"
+        onclick="openTab('courseDetails')"
+      >
+        Course Details
+      </button>
+
+      <button class="tablinks" onclick="openTab('sections')">Sections</button>
+
+      <button class="tablinks" onclick="openTab('navigation')">
+        Navigation
+      </button>
+
+      <button class="tablinks" onclick="openTab('apps')">Apps</button>
+
+      <button class="tablinks" onclick="openTab('featureOptions')">
+        Feature Options
+      </button>
+
+      <button class="tablinks" onclick="openTab('integrations')">
+        Integrations
+      </button>
+    </div>
+    <div id="tabContent">
+      <p>filler</p>
+    </div>
+
+    <script>
+      document.getElementById("intialTab").click();
+      function openTab(tabName) {
+        if (tabName === "courseDetails") {
+          document.getElementById("tabContent").innerHTML =
+            '<iframe src="course_details.html" width="100%"  height="1500px" frameborder="0" scrolling="auto" "></iframe>';
+        } else if (tabName === "navigation") {
+          document.getElementById("tabContent").innerHTML =
+            '<iframe src="navigation.html" width="100%"  height="1500px" frameborder="0" scrolling="auto" "></iframe>';
+        }
+      }
+    </script>
+  </body>
+</html>
