@@ -5,18 +5,34 @@ import { Link } from "react-router-dom";
 import "./assignment-editor-styles.css";
 import { FaEllipsisV, FaBars } from "react-icons/fa";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addAssignment,
+  deleteAssignment,
+  updateAssignment,
+  selectAssignment,
+} from "../assignmentReducer";
+
 function AssignmentEditor() {
   const { assignmentId } = useParams();
-  const assignment = db.assignments.find(
-    (assignment) => assignment._id === assignmentId
-  );
+  const assignment = useSelector((state) => state.assignmentReducer.assignment);
+  const newAssignment = useSelector((state) => state.assignmentReducer.newAssignment);
+  console.log(assignment);
 
   const { courseId } = useParams();
   const navigate = useNavigate();
   const handleSave = () => {
     console.log("Saving assignment");
+    if (newAssignment){
+      dispatch(addAssignment(assignment));
+
+    }else{
+      dispatch(updateAssignment(assignment));
+
+    }
     navigate(`/Kanbas/Courses/${courseId}/Assignments`);
   };
+  const dispatch = useDispatch();
   return (
     <div class="container-fluid">
       <div className="row">
@@ -41,6 +57,11 @@ function AssignmentEditor() {
               class="form-control"
               id="inputText"
               value={assignment.title}
+              onChange={(e) =>
+                dispatch(
+                  selectAssignment({ ...assignment, title: e.target.value })
+                )
+              }
             />
           </div>
         </div>
@@ -53,17 +74,16 @@ function AssignmentEditor() {
               id="exampleTextarea"
               rows="4"
               placeholder="Enter your text here..."
+              onChange={(e) =>
+                dispatch(
+                  selectAssignment({
+                    ...assignment,
+                    description: e.target.value,
+                  })
+                )
+              }
             >
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
+              {assignment.description ? assignment.description : ""}
             </textarea>
           </div>
         </div>
@@ -212,7 +232,17 @@ function AssignmentEditor() {
           <div>
             <div class="form-group">
               <label for="datepicker">Due:</label>
-              <input type="text" id="datepicker" class="form-control" />
+              <input
+                type="date"
+                id="datepicker"
+                class="form-control"
+                onChange={(e) =>
+                  dispatch(
+                    selectAssignment({ ...assignment, due: e.target.value })
+                  )
+                }
+                value={assignment.due ? assignment.due : ""}
+              />
             </div>
           </div>
 
@@ -221,16 +251,42 @@ function AssignmentEditor() {
               <div class="col">
                 <div class="form-group">
                   <label for="datepickerFrom">Available from</label>
-                  <input type="text" id="datepickerFrom" class="form-control" />
+                  <input
+                    type="date"
+                    id="datepickerFrom"
+                    class="form-control"
+                    value={
+                      assignment.availableFrom ? assignment.availableFrom : ""
+                    }
+                    onChange={(e) =>
+                      dispatch(
+                        selectAssignment({
+                          ...assignment,
+                          availableFrom: e.target.value,
+                        })
+                      )
+                    }
+                  />
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="datepickerUntil">Until</label>
                   <input
-                    type="text"
+                    type="date"
                     id="datepickerUntil"
                     class="form-control"
+                    value={
+                      assignment.availableUntil ? assignment.availableUntil : ""
+                    }
+                    onChange={(e) =>
+                      dispatch(
+                        selectAssignment({
+                          ...assignment,
+                          availableUntil: e.target.value,
+                        })
+                      )
+                    }
                   />
                 </div>
               </div>

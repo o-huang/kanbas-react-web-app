@@ -5,13 +5,26 @@ import { FaEllipsisV, FaBars } from "react-icons/fa";
 import "./assignment-styles.css";
 import AssignmentItem from "./AssignmentItem";
 import { AiOutlinePlus, AiFillCaretDown } from "react-icons/ai";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addAssignment,
+  deleteAssignment,
+  updateAssignment,
+  selectAssignment,
+  setNewAssignment,
+} from "./assignmentReducer";
 
 function Assignments() {
   const { courseId } = useParams();
-  const assignments = db.assignments;
+  // const assignments = db.assignments;
+  const assignments = useSelector(
+    (state) => state.assignmentReducer.assignments
+  );
+  const assignment = useSelector((state) => state.assignmentReducer.assignment);
   const courseAssignments = assignments.filter(
     (assignment) => assignment.course === courseId
   );
+  const dispatch = useDispatch();
   return (
     <div className="container-fluid">
       <div className="row">
@@ -25,8 +38,25 @@ function Assignments() {
         </div>
         <div className="col">
           <div className="d-flex justify-content-end">
-            <button className="btn btn-secondary ms-3 generalButtonColor">+ Group</button>
-            <button className="btn btn-danger ms-3">+ Assignment</button>
+            <button className="btn btn-secondary ms-3 generalButtonColor">
+              + Group
+            </button>
+            <Link
+              key={new Date().getTime()}
+              to={`/Kanbas/Courses/${courseId}/Assignments/${new Date().getTime()}`}
+              onClick={() => {
+                const assignment = {
+                  _id: new Date().getTime(),
+                  title: "New Assignment",
+                  course: courseId,
+                };
+                dispatch(setNewAssignment(true));
+                dispatch(selectAssignment(assignment));
+              }}
+            >
+              <button className="btn btn-danger ms-3">+ Assignment</button>
+            </Link>
+
             <button className="btn btn-secondary ms-3 generalButtonColor">
               <FaEllipsisV />
             </button>
@@ -62,6 +92,10 @@ function Assignments() {
               key={assignment._id}
               to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}
               className="list-group-item"
+              onClick={() => {
+                dispatch(setNewAssignment(false));
+                dispatch(selectAssignment(assignment));
+              }}
             >
               <AssignmentItem assignment={assignment} />
             </Link>

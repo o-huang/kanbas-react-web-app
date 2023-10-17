@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import db from "../../Database";
 import ModuleItem from "./ModuleItem";
 import { FaEllipsisV, FaBars } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addModule,
+  deleteModule,
+  updateModule,
+  setModule,
+} from "./moduleReducer";
 import {
   AiFillCheckCircle,
   AiOutlinePlus,
@@ -12,12 +19,72 @@ import { HiPencilSquare } from "react-icons/hi2";
 import { BiCaretDown } from "react-icons/bi";
 function ModuleList() {
   const { courseId } = useParams();
-  const modules = db.modules.filter((module) => module.course === courseId);
+  const modules = useSelector((state) => state.modulesReducer.modules);
+  const module = useSelector((state) => state.modulesReducer.module);
+  const dispatch = useDispatch();
+
   return (
     <div>
+      <div>
+        <button
+          className="btn btn-primary"
+          onClick={() => dispatch(addModule({ ...module, course: courseId }))}
+        >
+          Add
+        </button>
+        <button
+          className="btn btn-success mx-3"
+          onClick={() => dispatch(updateModule(module))}
+        >
+          Update
+        </button>
+
+        <div class="form-group mt-2">
+          <label for="moduleName">Module Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="moduleName"
+            placeholder="Module Name"
+            value={module.name}
+            onChange={(e) =>
+              dispatch(setModule({ ...module, name: e.target.value }))
+            }
+          ></input>
+        </div>
+
+        <div class="form-group mt-2">
+          <label for="moduleDescription">Module Description</label>
+          <textarea
+            value={module.description}
+            class="form-control"
+            id="moduleDescription"
+            rows="1"
+            onChange={(e) =>
+              dispatch(setModule({ ...module, description: e.target.value }))
+            }
+          ></textarea>
+        </div>
+      </div>
+
       {modules.map((module, index) => (
         <ul className="list-group mt-3 moduleScreen">
           <li className="list-group-item list-group-item-secondary">
+            <div className="float-end">
+              <button
+                className="btn btn-primary mx-2"
+                onClick={() => dispatch(setModule(module))}
+              >
+                Edit
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => dispatch(deleteModule(module._id))}
+              >
+                Delete
+              </button>
+            </div>
+
             <div className="row pt-2">
               <div className="col-auto">
                 <FaBars className="fa-bar" />
