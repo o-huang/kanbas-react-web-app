@@ -4,14 +4,18 @@ import { FaEllipsisV, FaBars } from "react-icons/fa";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { HiPencilSquare } from "react-icons/hi2";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addAssignment,
-  deleteAssignment,
-  updateAssignment,
-  selectAssignment,
-} from "./assignmentReducer";
+import * as assignmentReducer from "./assignmentReducer";
+
+import * as client from "./client";
+
 function AssignmentItem({ assignment }) {
   const dispatch = useDispatch();
+
+  const handleDelteAssignment = (assignmentId) => {
+    client.deleteAssignment(assignmentId).then((status) => {
+      dispatch(assignmentReducer.deleteAssignment(assignmentId));
+    });
+  };
 
   return (
     <div className="row pt-2">
@@ -42,7 +46,7 @@ function AssignmentItem({ assignment }) {
         className="btn btn-danger col-auto "
         onClick={(event) => {
           event.preventDefault();
-          dispatch(deleteAssignment(assignment._id));
+          handleDelteAssignment(assignment._id);
         }}
       >
         Delete

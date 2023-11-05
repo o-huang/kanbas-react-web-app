@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import db from "../../Kanbas/Database";
 import {
   Navigate,
@@ -15,9 +17,20 @@ import Grades from "./Grades";
 import "./courses-styles.css";
 import { PiListBold } from "react-icons/pi";
 
-function Courses({courses}) {
+function Courses() {
   const { courseId } = useParams();
-  const course = courses.find((course) => course._id === courseId);
+  const [course, setCourse] = useState({});
+  const URL = "http://localhost:4000/api/courses";
+  const findCourseById = async (courseId) => {
+    const response = await axios.get(`${URL}/${courseId}`);
+
+    setCourse(response.data);
+  };
+
+  useEffect(() => {
+    findCourseById(courseId);
+  }, [courseId]);
+
   const location = useLocation();
 
   const pathParts = location.pathname.split("/");
@@ -50,7 +63,11 @@ function Courses({courses}) {
       <div className="container-fluid">
         <div className="row breadcrumbRow">
           <h1 className="breadcrumb-title">
-            <PiListBold className="breadcrumb-icon"/> <span className="breadcrumb-course-name">{course.number} {course._id}</span> {title}
+            <PiListBold className="breadcrumb-icon" />{" "}
+            <span className="breadcrumb-course-name">
+              {course.number} {course._id}
+            </span>{" "}
+            {title}
           </h1>
           <hr className="horizontal-line" />
         </div>

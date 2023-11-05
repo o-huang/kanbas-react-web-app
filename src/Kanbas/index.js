@@ -4,36 +4,55 @@ import Dashboard from "./Dashboard";
 import Courses from "./Courses";
 import "./kanbas-styles.css";
 import db from "./Database";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import store from "./store";
 import { Provider } from "react-redux";
+import axios from "axios";
 function Kanbas() {
-  const [courses, setCourses] = useState(db.courses);
+  // const [courses, setCourses] = useState(db.courses);
   const [course, setCourse] = useState({
     name: "New Course",
     number: "New Number",
     startDate: "2023-09-10",
     endDate: "2023-12-15",
   });
-  const addNewCourse = () => {
-    setCourses([
-      ...courses,
-      { ...course, _id: new Date().getTime().toString() },
-    ]);
+  const [courses, setCourses] = useState([]);
+  const URL = "http://localhost:4000/api/courses";
+  const findAllCourses = async () => {
+    const response = await axios.get(URL);
+    setCourses(response.data);
   };
-  const deleteCourse = (courseId) => {
-    setCourses(courses.filter((course) => course._id !== courseId));
+  useEffect(() => {
+    findAllCourses();
+  }, []);
+
+  const addCourse = async () => {
+    console.log(course);
+    const response = await axios.post(URL, course);
+
+    setCourses([...courses, response.data]);
   };
-  const updateCourse = () => {
-    setCourses(
-      courses.map((c) => {
-        if (c._id === course._id) {
-          return course;
-        } else {
+
+  const deleteCourse = async (course) => {
+    const response = await axios.delete(`${URL}/${course._id}`);
+    setCourses(courses.filter((c) => c._id !== course._id));
+  };
+
+  const updateCourse = async () => {
+    try {
+      const response = await axios.put(`${URL}/${course._id}`, course);
+      console.log(response.data);
+      setCourses(
+        courses.map((c) => {
+          if (c._id === course._id) {
+            return response.data;
+          }
           return c;
-        }
-      })
-    );
+        })
+      );
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
   return (
@@ -53,7 +72,7 @@ function Kanbas() {
                     courses={courses}
                     course={course}
                     setCourse={setCourse}
-                    addNewCourse={addNewCourse}
+                    addNewCourse={addCourse}
                     deleteCourse={deleteCourse}
                     updateCourse={updateCourse}
                   />

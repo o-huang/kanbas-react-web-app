@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import db from "../../Database";
+
 import { FaEllipsisV, FaBars } from "react-icons/fa";
 import "./assignment-styles.css";
 import AssignmentItem from "./AssignmentItem";
@@ -12,7 +12,10 @@ import {
   updateAssignment,
   selectAssignment,
   setNewAssignment,
+  setAssignments,
 } from "./assignmentReducer";
+import * as client from "./client";
+import { findAssignmentsForCourse } from "./client";
 
 function Assignments() {
   const { courseId } = useParams();
@@ -21,10 +24,19 @@ function Assignments() {
     (state) => state.assignmentReducer.assignments
   );
   const assignment = useSelector((state) => state.assignmentReducer.assignment);
+
+  useEffect(() => {
+    findAssignmentsForCourse(courseId).then((assignments) => {
+      dispatch(setAssignments(assignments));
+    });
+  }, [courseId]);
+
   const courseAssignments = assignments.filter(
     (assignment) => assignment.course === courseId
   );
+
   const dispatch = useDispatch();
+
   return (
     <div className="container-fluid">
       <div className="row">
