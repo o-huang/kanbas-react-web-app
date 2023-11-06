@@ -40,23 +40,12 @@ function AssignmentEditor() {
   const handleSave = () => {
     if (newAssignment) {
       console.log("Creating New Assignment");
-      handleAddAssignment(assignment)
-        .then(() => {
-          navigate(`/Kanbas/Courses/${courseId}/Assignments`);
-        })
-        .catch((error) => {
-          console.error("Error creating assignment:", error);
-        });
+      handleAddAssignment(assignment);
     } else {
       console.log("Updating assignment");
-      handleUpdateAssignment(assignment)
-        .then(() => {
-          navigate(`/Kanbas/Courses/${courseId}/Assignments`);
-        })
-        .catch((error) => {
-          console.error("Error updating assignment:", error);
-        });
+      handleUpdateAssignment(assignment);
     }
+    navigate(`/Kanbas/Courses/${courseId}/Assignments`);
   };
   const dispatch = useDispatch();
   return (
