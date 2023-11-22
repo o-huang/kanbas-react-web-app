@@ -15,6 +15,8 @@ import {
 } from "react-icons/bs";
 function KanbasNavigation() {
   const links = [
+    { label: "SignIn", icon: AiFillQuestionCircle },
+    { label: "SignUp", icon: AiFillQuestionCircle },
     { label: "Account", icon: IoPersonCircle },
     { label: "Dashboard", icon: AiFillDashboard },
     { label: "Courses", icon: BiSolidBookBookmark },
@@ -26,7 +28,9 @@ function KanbasNavigation() {
     { label: "Commons", icon: BsFillArrowRightCircleFill },
     { label: "Help", icon: AiFillQuestionCircle },
   ];
+  
   const { pathname } = useLocation();
+
   return (
     <div className="list-group kanbas-navigation-list-group">
       <li class="list-group-item menu-item-text neu-logo">
