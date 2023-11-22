@@ -30,6 +30,7 @@ function Account() {
       fetchAccount();
     }
   }, []);
+  
   return (
     <div className="w-50">
       <h1>Account</h1>
@@ -38,6 +39,7 @@ function Account() {
           <div className="form-group">
             <label>Password</label>
             <input
+              type="text"
               className="form-control"
               placeholder="password"
               value={account.password}
@@ -49,6 +51,7 @@ function Account() {
           <div className="form-group">
             <label>First Name</label>
             <input
+              type="text"
               className="form-control"
               placeholder="First Name"
               value={account.firstName}
@@ -61,6 +64,7 @@ function Account() {
           <div className="form-group">
             <label>Last Name</label>
             <input
+              type="text"
               className="form-control"
               placeholder="Last Name"
               value={account.lastName}
@@ -73,6 +77,7 @@ function Account() {
           <div className="form-group">
             <label>Date of Birth</label>
             <input
+              type="date"
               className="form-control"
               placeholder="Date of Birth"
               value={account.dob}
@@ -83,6 +88,7 @@ function Account() {
           <div className="form-group">
             <label>Email</label>
             <input
+              type="email"
               className="form-control"
               placeholder="Email"
               value={account.email}
