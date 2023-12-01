@@ -77,7 +77,7 @@ function Account() {
           <div className="form-group">
             <label>Date of Birth</label>
             <input
-              type="date"
+              type="text"
               className="form-control"
               placeholder="Date of Birth"
               value={account.dob}
